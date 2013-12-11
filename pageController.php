@@ -21,11 +21,10 @@ function productBind(array $productData) {
     
     return $product;
 }
-
 if(isset($_GET['action'])) {
     $action = $_GET['action'];
-    $productIndex = $_GET['product_id'] - 1;
-    $productData = $products[$productIndex];
+    $productId = $_GET['product_id'] ;
+    $productData = $products[$productId-1];
     $cart = unserialize($_SESSION['cart']);
     
     switch($action) {
@@ -36,7 +35,7 @@ if(isset($_GET['action'])) {
             break;
        
         case 'remove':
-            $cart->remove($productIndex);      
+            $cart->remove($productId);      
             break;
 
         case 'checkout':
@@ -51,6 +50,5 @@ if(isset($_GET['action'])) {
     $_SESSION['cart'] = serialize($cart);
 
 }
-
 
 
