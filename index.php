@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/pageController.php';
 ?>
 
 <?php
@@ -22,7 +22,18 @@ session_start();
     <body>
         <h1>Welcome</h1>
         <h2>Available Products</h2>
+        <ul>
+            <?php
+            if (sizeof($products) > 0):
+                foreach ($products as $product):
+                    ?>
+                    <li><a href="./index.php?product_id=<?php echo $product['id']; ?>&action=add"><?php echo $product['name']; ?></a> <span><?php echo $product['price']; ?> €</span></li>
+                    <?php
+                endforeach;
+            endif;
+            ?> 
 
+        </ul>
 
         <h1>Cart</h1>
         <table class="cart">
@@ -35,9 +46,9 @@ session_start();
                 </tr>
             </thead>
             <tbody>
-                
+
             </tbody>
         </table>
-                
+
     </body>
 </html>

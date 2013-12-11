@@ -117,8 +117,7 @@ class FeatureContext extends MinkContext {
     public function iAddA($product)
     {
         $this->getPage()->clickLink($product);
-        $this->assertNumElements(1, "table.cart tbody tr");
-        $this->assertElementContainsText("table.cart tbody tr td", $product);
+               
     }
 
     /**
@@ -126,6 +125,8 @@ class FeatureContext extends MinkContext {
      */
     public function myCartShouldContainProduct($arg1, $arg2)
     {
+        $this->assertNumElements(1, "table.cart tbody tr");
+        $this->assertElementContainsText("table.cart tbody tr td", $product);
         throw new PendingException();
     }
     
