@@ -13,7 +13,7 @@ class Cart
     
     public function add(Product $product)
     {
-        $this->products[] = $product;
+        $this->products[$product->getId()] = $product;
     }
 
     public function getQty()
