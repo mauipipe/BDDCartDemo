@@ -142,4 +142,28 @@ class FeatureContext extends MinkContext {
     {
         $this->getPage()->clickLink("Remove");
     }
+
+    /**
+     * @Given /^my cart have:$/
+     */
+    public function myCartHave(TableNode $table)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @When /^I click Checkout to buy them$/
+     */
+    public function iClickCheckoutToBuyThem()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then /^I should see a payment message with a total of (\d+) euro$/
+     */
+    public function iShouldSeeAPaymentMessageWithATotalOfEuro($arg1)
+    {
+        throw new PendingException();
+    }
 }
