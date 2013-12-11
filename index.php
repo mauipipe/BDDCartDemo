@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 
 <?php
@@ -16,27 +15,29 @@ session_start();
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Simple Cart Example</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Simple Cart Example</title>
+    </head>
+    <body>
+        <h1>Welcome</h1>
+        <h2>Available Products</h2>
 
-<h1>Available Products</h1>
 
-
-<h1>Cart</h1>
-<table>
-    <thead>
-        <tr>
-            <td>Product</td>
-            <td>Price</td>
-            <td>Quantity</td>
-            <td>Remove</td>
-        </tr>
-    </tbody>
-   
-</table>
-
-</body>
+        <h1>Cart</h1>
+        <table class="cart">
+            <thead>
+                <tr>
+                    <td>Product</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Remove</td>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+                
+    </body>
 </html>

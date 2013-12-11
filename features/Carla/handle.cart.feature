@@ -5,6 +5,6 @@ Feature: user handle Cart
 
   Scenario: Add product in an empty cart
     Given I am in the product page
-    And my cart is empty
+    And my shopping cart is empty
     When I add a "Borsa shopping bamboo in pelle fucsia"
     Then my cart should contain 1 "Borsa shopping bamboo in pelle fucsia" product

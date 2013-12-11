@@ -89,13 +89,26 @@ class FeatureContext extends MinkContext {
     public function __construct(array $parameters) {
        
     }
-
+    
+    
+    /**
+     * @Given /^I am in the product page$/
+     */
+    public function iAmInTheProductPage()
+    {
+        $this->visit($this->locatePath("/"));
+        $this->assertPageContainsText("Available Products");
+        
+    }
+    
+    
+    
     /**
      * @Given /^my shopping cart is empty$/
      */
     public function myShoppingCartIsEmpty()
     {
-                
+       $this->assertNumElements(0, "table.cart tbody tr");  
     }
 
      /**
@@ -103,7 +116,9 @@ class FeatureContext extends MinkContext {
      */
     public function iAddA($product)
     {
-        
+        $this->getPage()->clickLink($product);
+        $this->assertNumElements(1, "table.cart tbody tr");
+        $this->assertElementContainsText("table.cart tbody tr td", $product);
     }
 
     /**
@@ -114,27 +129,12 @@ class FeatureContext extends MinkContext {
         throw new PendingException();
     }
     
+    
+    
     private function getPage(){
         
         return $this->getSession()->getPage();
         
-    }
+    }     
 
-   
-
-    /**
-     * @Given /^I am in the product page$/
-     */
-    public function iAmInTheProductPage()
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given /^my cart is empty$/
-     */
-    public function myCartIsEmpty()
-    {
-        throw new PendingException();
-    }
 }
