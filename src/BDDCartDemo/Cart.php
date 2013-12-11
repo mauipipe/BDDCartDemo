@@ -25,4 +25,9 @@ class Cart
     {
         return $this->products;
     }
+
+    public function remove($key)
+    {
+        unset($this->products[$key]);
+    }
 }
