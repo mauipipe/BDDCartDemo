@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\DemoModule\Entity;
+namespace spec\BDDCartDemo\Entity;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,7 +9,7 @@ class ProductSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('DemoModule\Entity\Product');
+        $this->shouldHaveType('BDDCartDemo\Entity\Product');
     }
     
     function it_can_be_hydrated_with_an_array(){

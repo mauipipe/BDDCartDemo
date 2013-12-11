@@ -1,6 +1,6 @@
 <?php
 
-namespace DemoModule\Entity;
+namespace BDDCartDemo\Entity;
 
 class Product
 {

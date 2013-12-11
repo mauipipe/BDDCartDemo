@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\DemoModule\Service;
+namespace spec\BDDCartDemo\Service;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,7 +9,7 @@ class ProductServiceSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('DemoModule\Service\ProductService');
+        $this->shouldHaveType('BDDCartDemo\Service\ProductService');
     }
     
     function it_load_a_list_of_product() {

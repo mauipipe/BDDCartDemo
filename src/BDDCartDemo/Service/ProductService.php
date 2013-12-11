@@ -1,7 +1,7 @@
 <?php
 
-namespace DemoModule\Service;
-use DemoModule\Entity\Product;
+namespace BDDCartDemo\Service;
+use BDDCartDemo\Entity\Product;
 
 class ProductService
 {
