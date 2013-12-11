@@ -1,8 +1,7 @@
 <?php
-require_once __DIR__ . '/pageController.php';
-?>
 
-<?php
+require_once __DIR__ . '/pageController.php';
+$cart = unserialize($_SESSION['cart']);
 /**
  *
  * @author mauilap <mauipipe@gmail.com>
@@ -41,12 +40,23 @@ require_once __DIR__ . '/pageController.php';
                 <tr>
                     <td>Product</td>
                     <td>Price</td>
-                    <td>Quantity</td>
                     <td>Remove</td>
                 </tr>
             </thead>
             <tbody>
-
+              <?php if($cart->getQty() > 0):
+              foreach($cart->getProducts() as $product) {
+                 
+                  ?>
+                <tr>
+                    <td><?php echo $product->getName()?></td>
+                    <td><?php echo $product->getPrice()?></td>
+                    <td><a href="./index.php?product_id=<?php echo $product->getId();?>&action=remove">Remove</a></td>
+                </tr>
+               <?php
+              }    
+              endif;
+              ?>
             </tbody>
         </table>
 
