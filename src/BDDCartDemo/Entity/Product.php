@@ -4,6 +4,7 @@ namespace BDDCartDemo\Entity;
 
 class Product
 {
+    private $id;
     private $name;
     private $price;
 
@@ -25,5 +26,13 @@ class Product
     public function getPrice()
     {
         return $this->price;
+    }
+    
+    public function setId($id){
+        $this->id = $id;
+    }
+    
+    public function getId(){
+        return $this->id;
     }
 }

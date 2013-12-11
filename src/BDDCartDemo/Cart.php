@@ -20,4 +20,9 @@ class Cart
     {
         return sizeof($this->products);
     }
+
+    public function getProducts()
+    {
+        return $this->products;
+    }
 }

@@ -23,4 +23,16 @@ class CartSpec extends ObjectBehavior
         $this->getQty()->shouldReturn(1);
         
     }
+    
+    function it_should_produce_a_product_list(Product $product){
+        
+        $product->setName("Product");
+        $product->setPrice(600);
+        $product->setId(1);
+        
+        $this->add($product);
+        
+        $this->getProducts()->shouldBeEqualTo(array($product));
+        
+    }
 }

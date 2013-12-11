@@ -123,11 +123,11 @@ class FeatureContext extends MinkContext {
     /**
      * @Then /^my cart should contain (\d+) "([^"]*)" product$/
      */
-    public function myCartShouldContainProduct($arg1, $arg2)
+    public function myCartShouldContainProduct($productNr, $productName)
     {
-        $this->assertNumElements(1, "table.cart tbody tr");
-        $this->assertElementContainsText("table.cart tbody tr td", $product);
-        throw new PendingException();
+        $this->assertNumElements($productNr, "table.cart tbody tr");
+        $this->assertElementContainsText("table.cart tbody tr td", $productName);
+      
     }
     
     
