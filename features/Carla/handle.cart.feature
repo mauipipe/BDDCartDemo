@@ -26,5 +26,5 @@ Feature: user handle Cart
       | product                                        | price |
       | Borsa shopping bamboo in pelle fucsia          | 600   |
       | Borsa shopping nice in vernice microguccissima | 700   |
-    When I click Checkout to buy them
+    When I click "Checkout" to buy them
     Then I should see a payment message with a total of 1300 euro

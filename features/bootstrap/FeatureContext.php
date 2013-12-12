@@ -60,8 +60,12 @@ class FeatureContext extends MinkContext {
      * @BeforeScenario
      */
     public function resetSession() {
-
-        unset($_SESSION);
+        $orderPath = __DIR__ . "/../../data/order.json";
+      
+        if(file_exists($orderPath)){
+            unlink($orderPath);
+        }
+        
     }
 
     public function getProducts() {
@@ -146,24 +150,36 @@ class FeatureContext extends MinkContext {
     /**
      * @Given /^my cart have:$/
      */
-    public function myCartHave(TableNode $table)
+    public function myCartHave(TableNode $productTable)
     {
-        throw new PendingException();
+        $products = $productTable->getHash();
+        foreach($products as $product){
+            $this->clickLink($product['product']);
+        }
+        $this->assertNumElements(sizeof($products), "table.cart tbody tr");
     }
-
-    /**
-     * @When /^I click Checkout to buy them$/
+    
+     /**
+     * @When /^I click "([^"]*)" to buy them$/
      */
-    public function iClickCheckoutToBuyThem()
+    public function iClickToBuyThem($buttonName)
     {
-        throw new PendingException();
+        $this->clickLink($buttonName);
     }
-
+    
+    
     /**
      * @Then /^I should see a payment message with a total of (\d+) euro$/
      */
-    public function iShouldSeeAPaymentMessageWithATotalOfEuro($arg1)
+    public function iShouldSeeAPaymentMessageWithATotalOfEuro($totalOrder)
     {
-        throw new PendingException();
+       $orderMsg = "Pagamento di " . $totalOrder . " avvenuto con successo";
+       $this->assertPageContainsText($orderMsg);
+       
     }
+   
+
+    
+
+   
 }
