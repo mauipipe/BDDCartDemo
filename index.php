@@ -16,54 +16,57 @@ $cart = unserialize($_SESSION['cart']);
     <head>
         <meta charset="UTF-8">
         <title>Simple Cart Example</title>
+        <link type="text/css" href="./css/style.css" rel="stylesheet"/>
     </head>
     <body>
-        <h1>Welcome</h1>
-        <h2>Available Products</h2>
-        <ul>
-            <?php
-            if (sizeof($products) > 0):
-                foreach ($products as $product):
-                    ?>
-                    <li><a href="./index.php?product_id=<?php echo $product['id']; ?>&action=add"><?php echo $product['name']; ?></a> <span><?php echo $product['price']; ?> €</span></li>
-                    <?php
-                endforeach;
-            endif;
-            ?> 
+        <div class="container">
+            <h1>Welcome</h1>
+            <h2>Available Products</h2>
+            <ul>
+                <?php
+                if (sizeof($products) > 0):
+                    foreach ($products as $product):
+                        ?>
+                        <li><a href="./index.php?product_id=<?php echo $product['id']; ?>&action=add"><?php echo $product['name']; ?></a> <span><?php echo $product['price']; ?> €</span></li>
+                        <?php
+                    endforeach;
+                endif;
+                ?> 
 
-        </ul>
-        <div>
-            <?php if($isOrderDone) {?>
-            <p>Pagamento di <?php echo $lastOrder['total'] ?> avvenuto con successo</p>
-            <?php } else {?>
-            <h1>Cart</h1>
-            <table class="cart">
-                <thead>
-                    <tr>
-                        <td>Product</td>
-                        <td>Price</td>
-                        <td>Remove</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if ($cart->getQty() > 0):
-                        foreach ($cart->getProducts() as $product) {
-                            ?>
+            </ul>
+            <div>
+                <?php if ($isOrderDone) { ?>
+                    <p>Pagamento di <?php echo $lastOrder['total'] ?> avvenuto con successo</p>
+                <?php } else { ?>
+                    <h1>Cart</h1>
+                    <table class="cart">
+                        <thead>
                             <tr>
-                                <td><?php echo $product->getName() ?></td>
-                                <td><?php echo $product->getPrice() ?></td>
-                                <td><a href="./index.php?product_id=<?php echo $product->getId(); ?>&action=remove">Remove</a></td>
+                                <td>Product</td>
+                                <td>Price</td>
+                                <td>Remove</td>
                             </tr>
+                        </thead>
+                        <tbody>
                             <?php
-                        }
-                    endif;
-                    ?>
-                </tbody>
-            </table>
-             <a href="./index.php?action=checkout">Checkout</a>
-            <?php }?>
-           
+                            if ($cart->getQty() > 0):
+                                foreach ($cart->getProducts() as $product) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $product->getName() ?></td>
+                                        <td><?php echo $product->getPrice() ?></td>
+                                        <td><a href="./index.php?product_id=<?php echo $product->getId(); ?>&action=remove">Remove</a></td>
+                                    </tr>
+                                    <?php
+                                }
+                            endif;
+                            ?>
+                        </tbody>
+                    </table>
+                    <a class="button" href="./index.php?action=checkout">Checkout</a>
+                <?php } ?>
+
+            </div>
         </div>
     </body>
 </html>
