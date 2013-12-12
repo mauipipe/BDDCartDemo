@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/pageController.php';
 $cart = unserialize($_SESSION['cart']);
 /**
@@ -33,32 +32,38 @@ $cart = unserialize($_SESSION['cart']);
             ?> 
 
         </ul>
-
-        <h1>Cart</h1>
-        <table class="cart">
-            <thead>
-                <tr>
-                    <td>Product</td>
-                    <td>Price</td>
-                    <td>Remove</td>
-                </tr>
-            </thead>
-            <tbody>
-              <?php if($cart->getQty() > 0):
-              foreach($cart->getProducts() as $product) {
-                 
-                  ?>
-                <tr>
-                    <td><?php echo $product->getName()?></td>
-                    <td><?php echo $product->getPrice()?></td>
-                    <td><a href="./index.php?product_id=<?php echo $product->getId();?>&action=remove">Remove</a></td>
-                </tr>
-               <?php
-              }    
-              endif;
-              ?>
-            </tbody>
-        </table>
-
+        <div>
+            <?php if($isOrderDone) {?>
+            <p>Pagamento di <?php echo $lastOrder['total'] ?> avvenuto con successo</p>
+            <?php } else {?>
+            <h1>Cart</h1>
+            <table class="cart">
+                <thead>
+                    <tr>
+                        <td>Product</td>
+                        <td>Price</td>
+                        <td>Remove</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($cart->getQty() > 0):
+                        foreach ($cart->getProducts() as $product) {
+                            ?>
+                            <tr>
+                                <td><?php echo $product->getName() ?></td>
+                                <td><?php echo $product->getPrice() ?></td>
+                                <td><a href="./index.php?product_id=<?php echo $product->getId(); ?>&action=remove">Remove</a></td>
+                            </tr>
+                            <?php
+                        }
+                    endif;
+                    ?>
+                </tbody>
+            </table>
+             <a href="./index.php?action=checkout">Checkout</a>
+            <?php }?>
+           
+        </div>
     </body>
 </html>
