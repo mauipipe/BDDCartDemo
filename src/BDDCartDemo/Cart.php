@@ -7,9 +7,11 @@ use BDDCartDemo\Manager\FileManager;
 class Cart
 {
     private $products;
+    private $total;
       
     public function __construct(){
         $this->products = array();
+        $this->total = 0;
     }
     /**
      * 
@@ -46,7 +48,7 @@ class Cart
     {
         unset($this->products[$key]);
     }
-    
+            
     /**
      * 
      * @return boolean
@@ -78,5 +80,20 @@ class Cart
        
        return false;
        
+    }
+
+    public function getTotal()
+    {
+        $this->calcTotal();
+        return $this->total;
+    }
+    
+    private function calcTotal(){
+      
+       foreach ($this->products as $product){
+          
+           $this->total += $product->getPrice();
+       }
+         
     }
 }

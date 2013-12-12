@@ -9,40 +9,48 @@ use BDDCartDemo\Entity\Product;
 
 class CartSpec extends ObjectBehavior
 {
+    
+    private $product;
+    private $mockId;
+    
+    function let(Product $product) {
+      
+        $this->mockId = 1;
+        $this->product = $product;
+        $this->product->getId()->willReturn($this->mockId);
+    }
+    
     function it_is_initializable()
     {
         $this->shouldHaveType('BDDCartDemo\Cart');
     }
     
-    function it_should_add(Product $product){
+    function it_should_add(){
            
-        $this->add($product);
+        $this->add($this->product);
         $this->getQty()->shouldReturn(1);
         
     }
     
-    function it_should_produce_a_list_of(Product $product){
-        
-        $mockId = 1;
-        $product->getId()->willReturn($mockId);
-        $this->add($product);
-        $this->getProducts()->shouldBeEqualTo(array($mockId => $product));
+    function it_should_produce_a_list_of(){
+             
+        $this->add($this->product);
+        $this->getProducts()->shouldBeEqualTo(array($this->mockId => $this->product));
         
     }
     
-    function it_should_remove(Product $product){
-        
-        $mockId = 1;
-        $product->getId()->willReturn($mockId);
-        $this->add($product);
-        $this->remove($mockId);
+    function it_should_remove(){
+          
+        $this->add($this->product);
+        $this->remove($this->mockId);
         $this->getQty()->shouldReturn(0);
-    }
-    
-    
-    function it_process_an_order(Product $product){
         
-        $mockProducts = array(
+    }
+ 
+    
+    function it_can_get_total_price_from_cart(){
+    
+       $mockProducts = array(
             array(
                 "id"=>1,
                 "price"=>600
@@ -53,15 +61,19 @@ class CartSpec extends ObjectBehavior
             )
         );
         
-        
-        foreach($mockProducts as $mockProduct) {
-            
-            $product->getId()->willReturn($mockProduct['id']);
-            $product->getPrice()->willReturn($mockProduct['price']);
+       $total = 0;
+       
+       foreach($mockProducts as $mockProduct) {
+            $product = new Product();
+            $product->setId($mockProduct['id']);
+            $product->setPrice($mockProduct['price']);       
             $this->add($product);
+            $total += $mockProduct['price'];
             
         }
         
-        $this->process()->shouldReturn(true);
+        $this->getTotal()->shouldBeEqualTo($total);
+        
     }
+     
 }
