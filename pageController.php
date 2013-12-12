@@ -4,6 +4,7 @@ ob_start(); @session_start();
 require_once 'vendor/autoload.php';
 use BDDCartDemo\Service\ProductService;
 use \BDDCartDemo\Cart;
+use BDDCartDemo\Manager\FileManager;
 
 if(!isset($_SESSION['cart'])) {
  $_SESSION['cart'] = serialize(new Cart);
@@ -11,6 +12,8 @@ if(!isset($_SESSION['cart'])) {
 }
 $productService = new ProductService();
 $products = $productService->getProducts();
+$fileManager = new FileManager();
+$isOrderDone = false;
 
 function productBind(array $productData) {
    
@@ -23,9 +26,12 @@ function productBind(array $productData) {
 }
 if(isset($_GET['action'])) {
     $action = $_GET['action'];
-    $productId = $_GET['product_id'] ;
-    $productData = $products[$productId-1];
     $cart = unserialize($_SESSION['cart']);
+    
+    if(isset($_GET['product_id'])) {
+        $productId = $_GET['product_id'] ;
+        $productData = $products[$productId-1];
+    }
     
     switch($action) {
        
@@ -39,7 +45,14 @@ if(isset($_GET['action'])) {
             break;
 
         case 'checkout':
-
+            if($cart->process()){
+               
+                $fileManager->setPath(__DIR__ . "/data/order.json");
+                $orders = $fileManager->read();
+                $lastOrder = end($orders);
+                $isOrderDone = true;
+                session_destroy();
+            }
             break;
         default:
             echo "Undefined Action";
