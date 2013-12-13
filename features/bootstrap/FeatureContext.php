@@ -106,20 +106,21 @@ class FeatureContext extends MinkContext {
         
     }
 
-    /**
-     * @Then /^my cart should contain (\d+) "([^"]*)" product$/
-     */
-    public function myCartShouldContainProduct($arg1, $arg2)
-    {
-        throw new PendingException();
-    }
+    
     
     private function getPage(){
         
         return $this->getSession()->getPage();
         
     }
-
+    
+    /**
+     * @Then /^my cart should contain (\d+) product "([^"]*)"$/
+     */
+    public function myCartShouldContainProduct($arg1, $arg2)
+    {
+        throw new PendingException();
+    }
    
 
     /**
@@ -137,4 +138,6 @@ class FeatureContext extends MinkContext {
     {
         throw new PendingException();
     }
+
+    
 }

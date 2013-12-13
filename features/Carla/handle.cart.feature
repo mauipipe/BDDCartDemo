@@ -7,4 +7,4 @@ Feature: user handle Cart
     Given I am in the product page
     And my cart is empty
     When I add a "Borsa shopping bamboo in pelle fucsia"
-    Then my cart should contain 1 "Borsa shopping bamboo in pelle fucsia" product
+    Then my cart should contain 1 product "Borsa shopping bamboo in pelle fucsia"
