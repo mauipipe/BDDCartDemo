@@ -23,6 +23,7 @@ function productBind(array $productData) {
     $product->setId($productData['id']);
     
     return $product;
+    
 }
 if(isset($_GET['action'])) {
     $action = $_GET['action'];
