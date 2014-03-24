@@ -1,6 +1,4 @@
-/nbproject/private/
-/nbproject/
-/vendor/
+vendor
 composer.phar
-/bin/
-/.idea/
+bin
+.idea

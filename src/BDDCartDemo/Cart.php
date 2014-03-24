@@ -48,47 +48,15 @@ class Cart
     {
         unset($this->products[$key]);
     }
-            
-    /**
-     * 
-     * @return boolean
-     */
-    public function process()
-    {
-       $fileManager = new FileManager();
-       $path = __DIR__ . "/../../data/order.json";
-       $fileManager->setPath($path);
-       $content = $fileManager->read();
-       
-       $message = "Pagamento avvenuto con successo";
-       $total = 0;
-       
-       foreach ($this->products as $product){
-           $total += $product->getPrice();
-       }
-       
-       $orderNr = sizeof($content);
-       
-       $order = array(
-           "ord_nr"=>$orderNr,
-           "total"=>$total
-               );
-       
-       if($fileManager->save($order)) {
-         return true;
-       }
-       
-       return false;
-       
-    }
+
 
     public function getTotal()
     {
-        $this->calcTotal();
+        $this->calculateTotal();
         return $this->total;
     }
     
-    private function calcTotal(){
+    private function calculateTotal(){
       
        foreach ($this->products as $product){
           
